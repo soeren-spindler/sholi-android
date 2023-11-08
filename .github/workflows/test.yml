@@ -31,9 +31,12 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: gradle
+          cache: 'gradle'
 
-      - run: chmod +x src/gradlew
+#      - run: chmod +x src/gradlew
 
       - name: Lint
-        run: echo "Lint"
+        run: |
+          echo "Lint"
+          cd src
+          ./gradlew lint
