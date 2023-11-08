@@ -5,8 +5,8 @@ name: Test
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
-  # push:
-  #   branches: [ "main" ]
+  push:
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
@@ -40,5 +40,9 @@ jobs:
       - name: Lint
         working-directory: ./src
         run: |
-          echo "Lint"
-          ./gradlew lint
+          ./gradlew lint --no-daemon --stacktrace
+
+      - name: Test
+        working-directory: ./src
+        run: |
+          ./gradlew test --no-daemon --stacktrace 
