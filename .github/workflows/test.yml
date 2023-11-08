@@ -32,10 +32,13 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: 'gradle'
+          
+      - name: Set permissions on gradlew
+        working-directory: ./src
+        run: chmod +x gradlew
 
       - name: Lint
+        working-directory: ./src
         run: |
           echo "Lint"
-          cd src
-          chmod +x gradlew
           ./gradlew lint
