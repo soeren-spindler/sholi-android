@@ -33,8 +33,7 @@ jobs:
           distribution: 'temurin'
           cache: gradle
 
-      - run: chmod +x gradlew
+      - run: chmod +x src/gradlew
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo "Finished"
+      - name: Lint
+        run: echo "Lint"
