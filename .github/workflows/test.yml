@@ -40,9 +40,9 @@ jobs:
       - name: Lint
         working-directory: ./src
         run: |
-          ./gradlew lint --no-daemon --stacktrace
+          ./gradlew lint --stacktrace
 
       - name: Test
         working-directory: ./src
         run: |
-          ./gradlew test --no-daemon --stacktrace 
+          ./gradlew test --stacktrace 
