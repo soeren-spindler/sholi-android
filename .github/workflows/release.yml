@@ -41,10 +41,12 @@ jobs:
       #     echo "KEYSTORE_FILENAME=$(basename ${{ vars.SIGNING_RELEASE_KEYSTORE_FILEPATH }})" >> "$GITHUB_ENV"
       #     echo "KEYSTORE_FILEDIR=$(dirname ${{ vars.SIGNING_RELEASE_KEYSTORE_FILEPATH }})" >> "$GITHUB_ENV"
 
-      - run: |
+      - name: Decode Keystore
+        id: decode_keystore
+        run: |
           echo "file: ${{ vars.SIGNING_RELEASE_KEYSTORE_FILEPATH }}"
-          
-      # - name: Decode Keystore
+          echo "${{ secrets.SIGNING_RELEASE_KEYSTORE }}" | base64 --decode > ${{ vars.SIGNING_RELEASE_KEYSTORE_FILEPATH }}
+
       #   id: decode_keystore
       #   uses: timheuer/base64-to-file@v1
       #   with:
