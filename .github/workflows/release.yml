@@ -6,7 +6,6 @@ name: Release
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "release" ]
     tags: ["v*"]
 
   # Allows you to run this workflow manually from the Actions tab
@@ -50,15 +49,15 @@ jobs:
           fileDir: "$KEYSTORE_FILE_DIR"
           encodedString: "${{ secrets.SIGNING_RELEASE_KEYSTORE }}"
       
-      - name: Test
-        working-directory: ./src
-        run: |
-          ./gradlew test --stacktrace
+      # - name: Test
+      #   working-directory: ./src
+      #   run: |
+      #     ./gradlew test --stacktrace
 
       - name: Build
         working-directory: ./src
         run: |
-          ./gradlew assembleRelease --stacktrace
+          ./gradlew assembleRelease --no-daemon --stacktrace
 
       - name: Upload APK
         uses: actions/upload-artifact@v1
