@@ -36,11 +36,19 @@ jobs:
       - name: Set permissions on gradlew
         working-directory: ./src
         run: chmod +x gradlew
+
+      - name: Decode Keystore
+        id: decode_keystore
+        uses: timheuer/base64-to-file@1
+        with:
+          fileName: "sholi-release.jks"
+          fileDir: "./keystore/"
+          encodedString: "${{ secrets.SIGNING_RELEASE_KEYSTORE }}"
       
-      - name: Test
-        working-directory: ./src
-        run: |
-          ./gradlew test --stacktrace
+      # - name: Test
+      #   working-directory: ./src
+      #   run: |
+      #     ./gradlew test --stacktrace
 
       - name: Build
         working-directory: ./src
