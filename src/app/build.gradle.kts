@@ -30,7 +30,10 @@ android {
 
     signingConfigs {
         create("release") {
-            storeFile = file("./keystore/sholi-release.jks")
+            storeFile = file(
+                System.getenv("SIGNING_RELEASE_KEYSTORE_FILEPATH")
+                    ?: "/home/sholi/keystore/sholi-release.jks"
+            )
             storePassword = System.getenv("SIGNING_RELEASE_KEYSTORE_PASSWORD")
             keyAlias = System.getenv("SIGNING_RELEASE_KEY_ALIAS")
             keyPassword = System.getenv("SIGNING_RELEASE_KEY_PASSWORD")
