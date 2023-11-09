@@ -39,7 +39,7 @@ jobs:
 
       - name: Decode Keystore
         id: decode_keystore
-        uses: timheuer/base64-to-file@1
+        uses: timheuer/base64-to-file@v1
         with:
           fileName: "sholi-release.jks"
           fileDir: "./keystore/"
