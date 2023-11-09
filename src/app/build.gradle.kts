@@ -28,33 +28,50 @@ android {
         }
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile = file("./keystore/sholi-release.jks")
+            storePassword = System.getenv("SIGNING_RELEASE_KEYSTORE_PASSWORD")
+            keyAlias = System.getenv("SIGNING_RELEASE_KEY_ALIAS")
+            keyPassword = System.getenv("SIGNING_RELEASE_KEY_PASSWORD")
+        }
+    }
+
     buildTypes {
-        release {
+        getByName("release") {
             isMinifyEnabled = false
+            isDebuggable = false
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = ShoLiDependencies.JavaSdk.compatibility
         targetCompatibility = ShoLiDependencies.JavaSdk.compatibility
     }
+
     kotlinOptions {
         jvmTarget = ShoLiDependencies.JavaSdk.jvmTarget
     }
+
     buildFeatures {
         compose = true
     }
+
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.3"
     }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
 }
 
 dependencies {
