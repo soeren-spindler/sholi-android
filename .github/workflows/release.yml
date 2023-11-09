@@ -42,8 +42,8 @@ jobs:
         run: |
           filepath = "${{ github.workspace }}/${{ vars.SIGNING_RELEASE_KEYSTORE_FILEPATH }}"
           echo "$filepath"
-          mkdir -p $(dirname $filepath)
-          echo "${{ secrets.SIGNING_RELEASE_KEYSTORE }}" | base64 --decode > $filepath
+          mkdir -p $(dirname "$filepath")
+          echo "${{ secrets.SIGNING_RELEASE_KEYSTORE }}" | base64 --decode > "$filepath"
           echo "SIGNING_RELEASE_KEYSTORE_FILEPATH=$filepath" >> "$GITHUB_ENV"  
 
       - name: Build
