@@ -37,19 +37,20 @@ jobs:
         working-directory: ./src
         run: chmod +x gradlew
 
+      - run: |
+          echo "SIGNING_RELEASE_KEYSTORE_FILE=${{ github.workspace }}/${{ vars.SIGNING_RELEASE_KEYSTORE_FILEPATH }}" >> "$GITHUB_ENV"  
+
       - name: Decode Keystore
         id: decode_keystore
         run: |
-          echo "SIGNING_RELEASE_KEYSTORE_FILE=${{ github.workspace }}/${{ vars.SIGNING_RELEASE_KEYSTORE_FILEPATH }}" >> "$GITHUB_ENV"  
           echo "$SIGNING_RELEASE_KEYSTORE_FILE"
           mkdir -p $(dirname "$SIGNING_RELEASE_KEYSTORE_FILE")
           echo "${{ secrets.SIGNING_RELEASE_KEYSTORE }}" | base64 --decode > "$SIGNING_RELEASE_KEYSTORE_FILE"
           
-
       - name: Build
         working-directory: ./src
-        # env:
-        #   SIGNING_RELEASE_KEYSTORE_FILEPATH: "${{ github.workspace }}/${{ vars.SIGNING_RELEASE_KEYSTORE_FILEPATH }}"
+        env:
+          SIGNING_RELEASE_KEYSTORE_FILEPATH: "$SIGNING_RELEASE_KEYSTORE_FILE"
         run: |
           echo "${{ env.SIGNING_RELEASE_KEYSTORE_FILEPATH }}"
           ./gradlew assembleRelease --no-daemon --stacktrace
