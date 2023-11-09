@@ -45,6 +45,7 @@ jobs:
         id: decode_keystore
         run: |
           echo "file: ${{ vars.SIGNING_RELEASE_KEYSTORE_FILEPATH }}"
+          mkdir -p $(dirname ${{ vars.SIGNING_RELEASE_KEYSTORE_FILEPATH }})
           echo "${{ secrets.SIGNING_RELEASE_KEYSTORE }}" | base64 --decode > ${{ vars.SIGNING_RELEASE_KEYSTORE_FILEPATH }}
 
       #   id: decode_keystore
