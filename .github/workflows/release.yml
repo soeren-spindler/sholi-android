@@ -45,6 +45,8 @@ jobs:
 
       - name: Build
         working-directory: ./src
+        env:
+          SIGNING_RELEASE_KEYSTORE_FILEPATH: ${{ vars.SIGNING_RELEASE_KEYSTORE_FILEPATH }}
         run: |
           ./gradlew assembleRelease --no-daemon --stacktrace
 
