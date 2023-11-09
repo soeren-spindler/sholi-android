@@ -50,7 +50,7 @@ jobs:
       - name: Build
         working-directory: ./src
         env:
-          SIGNING_RELEASE_KEYSTORE_FILEPATH: "$SIGNING_RELEASE_KEYSTORE_FILE"
+          SIGNING_RELEASE_KEYSTORE_FILEPATH: $SIGNING_RELEASE_KEYSTORE_FILE
         run: |
           echo "${{ env.SIGNING_RELEASE_KEYSTORE_FILEPATH }}"
           ./gradlew assembleRelease --no-daemon --stacktrace
