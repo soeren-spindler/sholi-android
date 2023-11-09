@@ -43,16 +43,17 @@ jobs:
       - name: Decode Keystore
         id: decode_keystore
         run: |
-          echo "$SIGNING_RELEASE_KEYSTORE_FILE"
-          mkdir -p $(dirname "$SIGNING_RELEASE_KEYSTORE_FILE")
-          echo "${{ secrets.SIGNING_RELEASE_KEYSTORE }}" | base64 --decode > "$SIGNING_RELEASE_KEYSTORE_FILE"
+          mkdir -p $(dirname $SIGNING_RELEASE_KEYSTORE_FILE)
+          echo "${{ secrets.SIGNING_RELEASE_KEYSTORE }}" | base64 --decode > $SIGNING_RELEASE_KEYSTORE_FILE
           
       - name: Build
         working-directory: ./src
         env:
           SIGNING_RELEASE_KEYSTORE_FILEPATH: ${{ vars.SIGNING_RELEASE_KEYSTORE_FILEPATH }}
+          SIGNING_RELEASE_KEYSTORE_PASSWORD: ${{ secrets.SIGNING_RELEASE_KEYSTORE_PASSWORD }}
+          SIGNING_RELEASE_KEY_ALIAS: ${{ secrets.SIGNING_RELEASE_KEY_ALIAS }}
+          SIGNING_RELEASE_KEY_PASSWORD: ${{ secrets.SIGNING_RELEASE_KEY_PASSWORD }}
         run: |
-          echo "${{ env.SIGNING_RELEASE_KEYSTORE_FILEPATH }}"
           ./gradlew assembleRelease --no-daemon --stacktrace
 
       # - name: Upload APK
