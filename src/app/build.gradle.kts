@@ -20,7 +20,7 @@ android {
         minSdk = ShoLiDependencies.AndroidSdk.minSdk
         targetSdk = ShoLiDependencies.AndroidSdk.targetSdk
         versionCode = 1
-        versionName = "1.0"
+        versionName = System.getenv("SHOLI_VERSION") ?: "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -37,6 +37,15 @@ android {
             storePassword = System.getenv("SIGNING_RELEASE_KEYSTORE_PASSWORD")
             keyAlias = System.getenv("SIGNING_RELEASE_KEY_ALIAS")
             keyPassword = System.getenv("SIGNING_RELEASE_KEY_PASSWORD")
+        }
+    }
+
+    applicationVariants.all {
+        outputs.forEach { output ->
+            if (output is com.android.build.gradle.internal.api.BaseVariantOutputImpl) {
+                output.outputFileName =
+                    "${applicationId}-v${versionName}.${output.outputFile.extension}"
+            }
         }
     }
 
