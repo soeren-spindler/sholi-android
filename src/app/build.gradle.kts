@@ -19,8 +19,8 @@ android {
         applicationId = "com.spindler.sholi.app"
         minSdk = ShoLiDependencies.AndroidSdk.minSdk
         targetSdk = ShoLiDependencies.AndroidSdk.targetSdk
-        versionCode = 1
-        versionName = System.getenv("SHOLI_VERSION") ?: "1.0"
+        versionCode = 0
+        versionName = "0.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
