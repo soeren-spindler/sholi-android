@@ -19,7 +19,7 @@ android {
         applicationId = "com.spindler.sholi.app"
         minSdk = ShoLiDependencies.AndroidSdk.minSdk
         targetSdk = ShoLiDependencies.AndroidSdk.targetSdk
-        versionCode = 0
+        versionCode = 1
         versionName = "0.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
