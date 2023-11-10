@@ -60,7 +60,7 @@ jobs:
           prerelease: true
           token: ${{ secrets.GITHUB_TOKEN }}
           files: |
-            src/app/build/outputs/apk/release/app-release.apk
+            src/app/build/outputs/apk/release/*.apk
 
       - name: Upload APK
         uses: actions/upload-artifact@v1
